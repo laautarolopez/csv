@@ -1,0 +1,71 @@
+const { Router } = require("express")
+// const { transferCredits, getReport } = require("../controllers/credits.controller.js")
+const { validateSchema } = require("../middlewares/validator.middleware.js")
+// const { transferCreditsSchema, getReportSchema } = require("../schemas/users.schema.js")
+
+const router = Router()
+
+/** POST Methods */
+/**
+ * @openapi
+ * '/credits/transfer':
+ *  post:
+ *     tags:
+ *     - Credits Controller
+ *     summary: Transfer credits from one user to another
+ *     requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *           schema:
+ *            type: object
+ *            required:
+ *              - from_id
+ *              - to_id
+ *              - amount
+ *            properties:
+ *              from_id:
+ *                type: string
+ *                default: '1'
+ *              to_id:
+ *                type: string
+ *                default: '2'
+ *              amount:
+ *                type: number
+ *                default: 10
+ *     responses:
+ *      200:
+ *        description: Successful transfer
+ *      400:
+ *        description: Error with transfer
+ *      500:
+ *        description: Server Error
+ */
+// router.post('/credits/transfer', validateSchema(transferCreditsSchema), transferCredits)
+router.post('/credits/transfer', () => '')
+
+/** GET Methods */
+/**
+ * @openapi
+ * '/credits/report':
+ *  get:
+ *     tags:
+ *     - Credits Controller
+ *     summary: Get a report indicating how many credits have been exchanged in total in a specific time period.
+ *     responses:
+ *      200:
+ *        description: Fetched Successfully
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                credits:
+ *                  type: number
+ *      500:
+ *        description: Server Error
+ */
+// router.get('/credits/report', validateSchema(getReportSchema), getReport)
+router.get('/credits/report', () => '')
+
+module.exports = router
