@@ -1,7 +1,21 @@
 const { Router } = require("express")
 const { getUsers, uploadUsers } = require("../controllers/users.controller.js")
+const multer = require('multer');
+const path = require('path');
 
 const router = Router()
+
+const storage = multer.memoryStorage();
+const upload = multer({
+    storage: storage,
+    fileFilter: (req, file, cb) => {
+        const ext = path.extname(file.originalname).toLowerCase();
+        if (ext !== '.csv') {
+            return cb(null, false);
+        }
+        cb(null, true);
+    }
+});
 
 /** GET Methods */
 /**
@@ -47,6 +61,6 @@ router.get('/users', getUsers)
  *      500:
  *        description: Server Error
  */
-router.post('/users/upload', uploadUsers)
+router.post('/users/upload', upload.single('users'), uploadUsers)
 
 module.exports = router
