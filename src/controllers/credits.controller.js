@@ -54,10 +54,8 @@ const getReport = async (req, res) => {
 
     try {
         const transfers_data = await query('SELECT SUM(amount) FROM transfers WHERE date >= $1 AND date <= $2', [initial_date_formatted, end_date_formatted])
-        console.log(transfers_data)
         const amount = transfers_data.rows[0].sum
-        console.log(amount)
-
+        
         res.json({ amount: amount | 0 })
     } catch(error) {
         return res.status(500).json({ error: error.message })
