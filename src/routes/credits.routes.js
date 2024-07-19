@@ -1,7 +1,7 @@
 const { Router } = require("express")
-// const { transferCredits, getReport } = require("../controllers/credits.controller.js")
 const { validateSchema } = require("../middlewares/validator.middleware.js")
-// const { transferCreditsSchema, getReportSchema } = require("../schemas/users.schema.js")
+const { transferCredits, getReport } = require("../controllers/credits.controller.js")
+const { transferCreditsSchema, getReportSchema } = require("../schemas/credits.schema.js")
 
 const router = Router()
 
@@ -41,8 +41,7 @@ const router = Router()
  *      500:
  *        description: Server Error
  */
-// router.post('/credits/transfer', validateSchema(transferCreditsSchema), transferCredits)
-router.post('/credits/transfer', () => '')
+router.post('/credits/transfer', validateSchema(transferCreditsSchema), transferCredits)
 
 /** GET Methods */
 /**
@@ -52,6 +51,26 @@ router.post('/credits/transfer', () => '')
  *     tags:
  *     - Credits Controller
  *     summary: Get a report indicating how many credits have been exchanged in total in a specific time period.
+ *     requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *           schema:
+ *            type: object
+ *            required:
+ *              - initial_date
+ *              - end_date
+ *            properties:
+ *              initial_date:
+ *                type: string
+ *                format: date
+ *                default: '2024-01-01'
+ *                description: The start date of the period.
+ *              end_date:
+ *                type: date
+ *                format: date
+ *                default: '2024-01-31'
+ *                description: The end date of the period.
  *     responses:
  *      200:
  *        description: Fetched Successfully
@@ -65,7 +84,6 @@ router.post('/credits/transfer', () => '')
  *      500:
  *        description: Server Error
  */
-// router.get('/credits/report', validateSchema(getReportSchema), getReport)
-router.get('/credits/report', () => '')
+router.get('/credits/report', validateSchema(getReportSchema), getReport)
 
 module.exports = router
