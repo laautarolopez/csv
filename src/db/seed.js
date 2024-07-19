@@ -16,11 +16,11 @@ const runSeed = async () => {
         // Crear la tabla "transfers" si no existe
         await query(`
             CREATE TABLE IF NOT EXISTS transfers (
-                id TEXT PRIMARY KEY,
+                id SERIAL PRIMARY KEY,
                 from_id TEXT REFERENCES users(id),
                 to_id TEXT REFERENCES users(id),
                 amount NUMERIC NOT NULL,
-                arrival_date TIMESTAMP NOT NULL
+                date DATE NOT NULL
             );
         `)
         console.log(`Created "transfers" table`)
