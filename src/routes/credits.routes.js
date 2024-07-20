@@ -79,7 +79,7 @@ router.post('/credits/transfer', validateSchema(transferCreditsSchema), transfer
  *            schema:
  *              type: object
  *              properties:
- *                credits:
+ *                amount:
  *                  type: number
  *      500:
  *        description: Server Error
